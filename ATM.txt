@@ -1,0 +1,65 @@
+import java.util.*;
+
+class ATM {
+    double bal = 1000;   // initial balance
+    int pin = 1234;
+
+    void checkPin() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter PIN: ");
+        int p = sc.nextInt();
+
+        if (p == pin) {
+            menu();
+        } else {
+            System.out.println("Wrong PIN");
+        }
+    }
+
+    void menu() {
+        Scanner sc = new Scanner(System.in);
+        int ch;
+
+        do {
+            System.out.println("\n1.Check Balance");
+            System.out.println("2.Deposit");
+            System.out.println("3.Withdraw");
+            System.out.println("4.Exit");
+
+            System.out.print("Choice: ");
+            ch = sc.nextInt();
+
+            switch (ch) {
+                case 1:
+                    System.out.println("Balance: " + bal);
+                    break;
+
+                case 2:
+                    System.out.print("Enter amount: ");
+                    double dep = sc.nextDouble();
+                    bal += dep;
+                    System.out.println("Deposited!");
+                    break;
+
+                case 3:
+                    System.out.print("Enter amount: ");
+                    double wd = sc.nextDouble();
+                    if (wd <= bal) {
+                        bal -= wd;
+                        System.out.println("Withdrawn!");
+                    } else {
+                        System.out.println("Insufficient Balance");
+                    }
+                    break;
+            }
+
+        } while (ch != 4);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ATM obj = new ATM();
+        obj.checkPin();
+    }
+}
